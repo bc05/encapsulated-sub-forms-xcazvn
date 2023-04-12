@@ -1,0 +1,5 @@
+<div>
+    Invalid: {{control.invalid}}<br>
+    Touched {{control.touched}}
+</div>
+<span class="errorWrapper" *ngIf="control.invalid && control.touched" (click)="clearError()" [innerHtml]="error"></span>

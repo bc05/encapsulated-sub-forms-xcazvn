@@ -1,0 +1,11 @@
+<form [formGroup]="form">
+  <div class="question">
+    <app-sub-form formControlName="subForm"></app-sub-form>
+  </div>
+  
+  <hr />
+
+  <button type="button" (click)="doStuff()">Touch all inputs</button>
+
+  <pre>{{ form.valid }}</pre>
+</form>
