@@ -5,6 +5,10 @@ import {
   ControlValueAccessor,
   Validators,
   NG_VALUE_ACCESSOR,
+  NG_VALIDATORS,
+  Validator,
+  AbstractControl,
+  ValidationErrors,
 } from '@angular/forms';
 
 @Component({
@@ -17,9 +21,16 @@ import {
       multi: true,
       useExisting: forwardRef(() => SubFormComponent),
     },
+    {
+      provide: NG_VALIDATORS,
+      useExisting: forwardRef(() => SubFormComponent),
+      multi: true,
+    },
   ],
 })
-export class SubFormComponent implements OnInit, ControlValueAccessor {
+export class SubFormComponent
+  implements OnInit, ControlValueAccessor, Validator
+{
   public form: FormGroup;
 
   private changed;
@@ -46,5 +57,13 @@ export class SubFormComponent implements OnInit, ControlValueAccessor {
 
   registerOnTouched(fn) {
     this.touched = fn;
+  }
+
+  validate(control: AbstractControl): ValidationErrors {
+    return this.form.invalid
+      ? {
+          invalid: true,
+        }
+      : null;
   }
 }
